@@ -1,0 +1,11 @@
+.container {
+    padding: var(--s-padding);
+
+    border-radius: var(--r-normal);
+
+    border: 1px solid var(--c-outline);
+    background-color: var(--c-surface);
+
+    width: fit-content;
+    height: fit-content;
+}

@@ -1,0 +1,45 @@
+.form, .header {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding-inline: calc(var(--s-padding) * 2);
+    padding-block: 0;
+
+    @media screen and (max-width: 800px) {
+        padding-inline: var(--s-padding);
+    }
+}
+
+.form {
+    padding: var(--s-padding);
+
+    align-items: center;
+
+    width: 100%;
+    flex-grow: 1;
+}
+
+.header {
+    width: 100%;
+
+    font-size: 1.3rem;
+
+    padding-top: var(--s-padding);
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+
+    flex-grow: 1;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+
+        margin-top: var(--s-padding);
+    }
+}

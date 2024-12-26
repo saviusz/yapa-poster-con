@@ -1,0 +1,31 @@
+.container {
+
+    border-radius: var(--r-small);
+    
+    border: solid 1px var(--c-outline);
+
+    padding: 0.5em 1em;
+    font-size: 1rem;
+
+    transition: all 75ms ease-in-out;
+
+    box-shadow: 0px 0px 0px 0px #00000030;
+
+    &:hover {
+        box-shadow: 2px 2px 5px 0px #00000030;
+    }
+
+    &:active {
+        box-shadow: 0px 0px 0px 0px #00000030;
+    }
+}
+
+.normal {
+
+}
+
+.primary {
+    background-color: var(--c-primary);
+    color: var(--c-onPrimary);
+    border-color: var(--c-primary);
+}

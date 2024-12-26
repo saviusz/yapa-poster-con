@@ -1,0 +1,72 @@
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: var(--s-gap);
+
+    &>* {
+        text-decoration: none;
+
+        color: inherit;
+        font-weight: bold;
+
+        padding: calc(var(--s-padding) / 4);
+        background-color: #00000001;
+
+        transition: all 75ms ease-in-out;
+
+        &:hover {
+            background-color: #0000000e;
+        }
+
+        &:active {
+            background-color: #00000007;
+        }
+
+        border-radius: var(--r-small); 
+    }
+}
+
+.container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: calc(var(--s-padding) / 2);
+}
+
+.user {
+    position: absolute;
+    right: calc(var(--s-padding) / 2);
+    top: calc(var(--s-padding) / 2);
+
+    text-decoration: none;
+    color: inherit;
+}
+
+.username {
+    font-weight: bold;
+    color: var(--c-primary);
+    
+    text-decoration: underline dashed 1.5px ;
+    text-underline-offset: calc(var(--s-gap) / 2.5);
+    text-decoration-color: var(--c-text, var(--c-onSurface));
+
+    
+    &:hover {
+        text-decoration-color: var(--c-primary);
+    }
+
+    &:active {
+        text-decoration: var(--c-primaryActive);
+        color: var(--c-primaryActive);
+    }
+    
+}
+
+@media screen and (max-width: 600px) {}
