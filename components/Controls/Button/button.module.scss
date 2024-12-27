@@ -9,6 +9,9 @@
 
     transition: all 75ms ease-in-out;
 
+    &:disabled {
+        opacity: .3;
+    }
 }
 
 .normal {

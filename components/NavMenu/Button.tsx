@@ -1,7 +1,7 @@
 import React from 'react'
 import UseAnimations from 'react-useanimations';
 import menu2 from 'react-useanimations/lib/menu2';
-import Button from '../Button';
+import Button from '../Controls/Button';
 
 type Props = {
     isChecked: boolean;

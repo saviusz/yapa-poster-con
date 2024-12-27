@@ -1,5 +1,5 @@
 import { signOutAction } from '@/app/(auth)/actions'
-import Button from '@/components/Button'
+import Button from '@/components/Controls/Button'
 import { createClient } from '@/utils/supabase/server';
 import React from 'react'
 

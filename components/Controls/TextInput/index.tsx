@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
 import style from "./TextInput.module.scss"
-import clsx from 'clsx';
+import GenericInput from '../GenericInput';
 
 interface Props {
     label?: string;
@@ -13,6 +13,7 @@ interface Props {
     onChange?: (value: string) => void;
 
     name?: string;
+    role?: "text" | "password" | "email";
 
     [key: string]: any
 }
@@ -21,8 +22,7 @@ export default function TextInput(props: Props) {
 
     const ref = useRef<HTMLInputElement>(null)
 
-    return <div className={style.container}>
-        {props.label && <span className={style.label}>{props.label}</span>}
+    return <GenericInput label={props.label} note={props.note}>
         <input
             {...props}
             className={style.input}
@@ -32,8 +32,7 @@ export default function TextInput(props: Props) {
             ref={ref}
             value={props.value}
         />
-        {props.note && <span className={style.note}>{props.note}</span>}
-    </div>
+    </GenericInput>
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (props.onChange) props.onChange(event.target.value);

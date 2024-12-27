@@ -16,6 +16,11 @@
 
     --s-gap: 1rem;
     --s-padding: 2rem;
+
+    @media screen and (max-width: 400px) {
+        --s-padding: 1rem;
+        --s-gap: .5rem;
+    }
     
     --r-small: 5px;
     --r-normal: 10px;
