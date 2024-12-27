@@ -5,6 +5,14 @@
 
 
 :root {
+    --c-neutral-0: rgb(255, 255, 255);
+    --c-neutral-1: rgb(234, 244, 247);
+    --c-neutral-2: rgb(180, 180, 200);
+    --c-neutral-3: rgb(140, 140, 160);
+    --c-neutral-4: rgb(100, 100, 110);
+    --c-neutral-5: rgb(55, 58, 60);
+    --c-neutral-6: rgb(38, 48, 50);
+    --c-neutral-7: rgb(11, 42, 49);
 
     --s-gap: 1rem;
     --s-padding: 2rem;
@@ -13,12 +21,13 @@
     --r-normal: 10px;
     --r-big: 20px;
     
-    --c-outline: rgb(180, 180, 180);
+    --c-outline: var(--c-neutral-2);
 
-    --c-background: rgb(234, 244, 247);
+    --c-background: var(--c-neutral-1);
+    /* --c-background: rgb(234, 244, 247); */
     
-    --c-surface: white;
-    --c-onSurface: black;
+    --c-surface: var(--c-neutral-0);
+    --c-onSurface: var(--c-neutral-7);
     
     --c-outline-error: rgb(251, 79, 79);
     --c-surface-error: rgb(255, 235, 235);
@@ -30,9 +39,10 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --c-outline: rgb(180, 180, 180);
+        --c-outline: var(--c-neutral-4);
         
-        --c-background: rgb(11, 42, 49);
+        --c-background: var(--c-neutral-7);
+        /* --c-background: rgb(11, 42, 49); */
 
         --c-surface: rgb(14, 55, 64);
         --c-onSurface: white;
@@ -81,4 +91,5 @@ header, section {
 
 h1 {
     margin-bottom: 1rem;
+    color: var(--c-primary);
 }

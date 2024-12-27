@@ -9,8 +9,28 @@
 
     transition: all 75ms ease-in-out;
 
-    box-shadow: 0px 0px 0px 0px #00000030;
+}
 
+.normal {
+    background-color: var(--c-surface);
+    color: var(--c-onSurface);
+    border-color: var(--c-outline);
+
+    box-shadow: none;
+
+    &:active {
+        background-color: var(--c-onSurface);
+        color: var(--c-surface);
+    }
+}
+
+.primary {
+    background-color: var(--c-primary);
+    color: var(--c-onPrimary);
+    border-color: var(--c-primary);
+    
+    box-shadow: 0px 0px 0px 0px #00000030;
+    
     &:hover {
         box-shadow: 2px 2px 5px 0px #00000030;
     }
@@ -18,14 +38,4 @@
     &:active {
         box-shadow: 0px 0px 0px 0px #00000030;
     }
-}
-
-.normal {
-
-}
-
-.primary {
-    background-color: var(--c-primary);
-    color: var(--c-onPrimary);
-    border-color: var(--c-primary);
 }

@@ -1,0 +1,64 @@
+.container {
+    width: 100%;
+    
+    
+    position: relative;
+
+ /*    display: flex;
+    flex-direction: column;
+
+    gap: 2px; */
+
+    --modifier-color: var(--c-outline);
+    margin-block: .5rem;
+}
+
+.label {
+    text-wrap: nowrap;
+
+    font-size: smaller;
+
+    // padding-inline: calc(var(--s-gap) / 4);
+    color: var(--c-neutral-4);
+
+    position: absolute;
+
+    bottom: calc(100% + 2px);
+    left: calc(var(--s-gap) / 4);   
+}
+
+.note {
+    max-width: 70%;
+    font-size: small;
+
+    padding-inline: calc(var(--s-gap) / 4);
+
+    color: var(--modifier-color);
+
+    align-self: end;
+    text-align: right;
+
+    position: absolute;
+    top: calc(100% + 2px);
+    right: calc(var(--s-gap) / 4);
+}
+
+.input {
+
+    width: 100%;
+    min-width: 10ch;
+
+    border-radius: var(--r-small);
+    border: solid 1px var(--modifier-color);
+
+    overflow: auto;
+    padding: calc(var(--s-gap) / 2);
+
+    font-size: 1em;
+
+    background-color: var(--c-background);
+    color: var(--c-onSurface);
+
+    outline-color: invert;
+    
+}

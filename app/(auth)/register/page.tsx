@@ -1,6 +1,6 @@
 "use client"
 
-import Button, { ButtonType } from '@/components/Button'
+import Button, { ButtonRank } from '@/components/Button'
 import React, { useActionState } from 'react'
 
 import { signUpAction } from "@/app/(auth)/actions";

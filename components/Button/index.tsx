@@ -2,26 +2,26 @@ import React from 'react'
 import style from './button.module.scss'
 import clsx from 'clsx';
 
-export enum ButtonType {
+export enum ButtonRank {
   Normal,
   Primary
 }
 
 interface Props {
     children: string;
-    type?: ButtonType;
-    disabled?: boolean;
+    rank?: ButtonRank;
     onClick?: () => void;
+    [key: string]: any;
 }
 
-export default function Button({children, type, disabled, onClick}: Props) {
+export default function Button({children, rank, onClick, ...rest}: Props) {
 
   let btnClass = style.normal;
 
-  if (type == ButtonType.Primary) btnClass = style.primary;
+  if (rank == ButtonRank.Primary) btnClass = style.primary;
 
 
   return (
-    <button className={clsx(style.container, btnClass)} disabled={disabled} onClick={onClick}>{children}</button>
+    <button className={clsx(style.container, btnClass)} onClick={onClick} {...rest}>{children}</button>
   )
 }

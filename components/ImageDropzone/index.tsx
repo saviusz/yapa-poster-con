@@ -15,9 +15,11 @@ export default function ImageDropzone(props: Props) {
     const handleFile = (file: File | undefined) => {
         if (file && file.type.startsWith("image/")) {
             const fileReader = new FileReader();
+
             fileReader.onloadend = () => {
                 setImage(fileReader.result as string);
             }
+
 
             fileReader.readAsDataURL(file);
         } else {

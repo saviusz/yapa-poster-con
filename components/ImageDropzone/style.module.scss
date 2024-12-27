@@ -36,8 +36,8 @@
     opacity: .7;
 
     padding: var(--s-padding);
-    background-color: rgba(23, 23, 23, 0.491);
-    color: white;
+    background-color: var(--c-background);
+    color: var(--c-onSurface);
 
     height: 100%;
     width: 100%;
