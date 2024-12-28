@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import NavButton from './Button';
-import { createClient } from '@/utils/supabase/server';
+import style from "./nav-menu.module.scss";
 
-import style from './nav-menu.module.scss';
-import Link from 'next/link';
+import Link from "next/link";
+import React from "react";
 
-type Props = {}
+import { createClient } from "@/utils/supabase/server";
 
-export default async function NavMenu({ }: Props) {
+export default async function NavMenu() {
 
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user }} = await supabase.auth.getUser();
 
 
   return <nav className={style.container}>
@@ -18,10 +16,9 @@ export default async function NavMenu({ }: Props) {
       <Link href="/">Nowe zgłoszenia</Link>
       {user && <Link href="/submissions">Przesłane</Link>}
     </div>
-    {user ?
-      <Link href="/settings" className={style.user}>Cześć <span className={style.username}>{user?.email}</span>!</Link>
-      :
-      <Link href="/login" className={style.user}>Siemasz, <span className={style.username}>zaloguj się</span>!</Link>
+    {user
+      ? <Link href="/settings" className={style.user}>Cześć <span className={style.username}>{user?.email}</span>!</Link>
+      : <Link href="/login" className={style.user}>Siemasz, <span className={style.username}>zaloguj się</span>!</Link>
     }
-  </nav>
+  </nav>;
 }
