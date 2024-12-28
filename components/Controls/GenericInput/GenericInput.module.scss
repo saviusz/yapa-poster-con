@@ -42,3 +42,7 @@
     top: calc(100% + 2px);
     right: calc(var(--s-padding) / 4);
 }
+
+.error {
+    --modifier-color: var(--c-error);
+}
