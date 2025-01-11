@@ -68,7 +68,7 @@ export async function submitForm(_state: SubmitFormState, data: FormData) : Prom
     loc_desc      : location,
     desc          : description,
     loc           : `POINT(${lng} ${lat})`,
-    image_path    : `${file.data.fullPath}`,
+    image_path    : `${file.data.path}`,
   });
 
   if (res.error || res.count === 0 || res.status !== 201) {

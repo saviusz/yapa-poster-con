@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import { useActionState } from "react";
 
@@ -35,6 +36,7 @@ export default function Index() {
         disabled={pending}>
         {pending ? "Logowanie..." : "Zaloguj się"}
       </Button>
+      <p>Nie masz konta? <Link href="/register">Zarejestruj się!</Link></p>
     </FormCard>
   </section>;
 

@@ -1,0 +1,47 @@
+.main {
+    width: 100%;
+    padding: var(--s-padding);
+
+    text-align: center;
+}
+
+.table {
+    max-width: 80vw;
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin: auto;
+
+    th,
+    td {
+        padding: calc(var(--s-padding) / 3);
+
+        text-align: start;
+    }
+
+    thead {
+
+        & th {
+            background-color: var(--c-surface);
+            color: var(--c-onSurface);
+        }
+
+        & th:first-child {
+            border-radius: var(--r-normal) 0 0 var(--r-normal);
+        }
+
+        & th:last-child {
+            border-radius: 0 var(--r-normal) var(--r-normal) 0;
+        }
+    }
+
+    & img {
+        width: 100%;
+        max-width: 30vmin;
+        object-fit: cover;
+        aspect-ratio: 5/4;
+
+        border-radius: var(--r-small);
+    }
+}

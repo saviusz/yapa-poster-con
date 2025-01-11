@@ -21,23 +21,23 @@
         --s-padding: 1rem;
         --s-gap: .5rem;
     }
-    
+
     --r-small: 5px;
     --r-normal: 10px;
     --r-big: 20px;
-    
+
     --c-outline: var(--c-neutral-2);
 
     --c-background: var(--c-neutral-1);
     /* --c-background: rgb(234, 244, 247); */
-    
+
     --c-surface: var(--c-neutral-0);
     --c-onSurface: var(--c-neutral-7);
-    
+
     --c-error: rgb(251, 79, 79);
     --c-outline-error: rgb(251, 79, 79);
     --c-surface-error: rgb(255, 235, 235);
-    
+
     --c-primary: rgb(255, 147, 15);
     --c-onPrimary: rgb(56, 39, 6);
     --c-primaryActive: rgb(255, 187, 127);
@@ -46,17 +46,17 @@
 @media screen and (prefers-color-scheme: dark) {
     :root {
         --c-outline: var(--c-neutral-4);
-        
+
         --c-background: var(--c-neutral-7);
         /* --c-background: rgb(11, 42, 49); */
 
         --c-surface: rgb(14, 55, 64);
         --c-onSurface: white;
-        
+
         --c-error: rgb(241, 94, 94);
         --c-outline-error: rgb(98, 28, 28);
         --c-surface-error: rgb(50, 40, 40);
-        
+
         --c-primary: rgb(255, 147, 15);
         --c-onPrimary: rgb(56, 39, 6);
         --c-primaryActive: rgb(255, 187, 127);
@@ -78,7 +78,7 @@ body {
 
     @media screen and (max-width: 600px) {
         flex-direction: column-reverse;
-        
+
         justify-content: space-between;
     }
 }
@@ -92,11 +92,32 @@ nav {
     z-index: 1;
 }
 
-header, section {
+header,
+section {
     padding: var(--s-padding);
 }
 
 h1 {
     margin-bottom: 1rem;
     color: var(--c-primary);
+}
+
+a {
+    font-weight: bold;
+    color: var(--c-primary);
+
+    text-decoration: underline dashed 1.5px;
+    text-underline-offset: calc(var(--s-gap) / 2.5);
+    text-decoration-color: var(--c-text, var(--c-onSurface));
+
+
+    &:hover {
+        text-decoration-color: var(--c-primary);
+    }
+
+    &:active {
+        text-decoration: var(--c-primaryActive);
+        color: var(--c-primaryActive);
+    }
+
 }

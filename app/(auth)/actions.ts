@@ -50,7 +50,7 @@ export async function signUpAction(state: SignUpState | undefined, formData: For
     };
   }
 
-  return { success: true };
+  return redirect("/");
 }
 
 export interface SignInState {
