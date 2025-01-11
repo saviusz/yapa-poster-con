@@ -1,47 +1,49 @@
 "use client";
 
-import Button, { ButtonRank } from "@/components/Controls/Button";
-import ImageDropzone from "@/components/Controls/ImageDropzone";
 import style from "./SubmissionFormCard.module.scss";
-import { useActionState, useState } from "react";
 
 import exifr from "exifr";
+import { useActionState, useState } from "react";
+
+import Button, { ButtonRank } from "@/components/Controls/Button";
+import ImageDropzone from "@/components/Controls/ImageDropzone";
 import TextInput from "@/components/Controls/TextInput";
-import { submitForm } from "./submitForm";
 import ErrorCard from "@/components/ErrorCard";
 import { FormCard } from "@/components/FormCard";
 
+import { submitForm } from "./submitForm";
+
 interface GeoCodeResp {
-  place_id: string,
-  licence: string,
-  osm_type: string,
-  osm_id: string,
-  lat: number,
-  lon: number,
-  display_name: string,
+  place_id     : string;
+  licence      : string;
+  osm_type     : string;
+  osm_id       : string;
+  lat          : number;
+  lon          : number;
+  display_name : string;
   address: {
-    city?: string,
-    country?: string,
-    country_code?: string,
-    county?: string,
-    house_number?: string,
-    neighbourhood?: string,
-    postcode?: string,
-    road?: string,
-    state?: string
-  },
-  boundingbox?: [number, number, number, number]
+    city?          : string;
+    country?       : string;
+    country_code?  : string;
+    county?        : string;
+    house_number?  : string;
+    neighbourhood? : string;
+    postcode?      : string;
+    road?          : string;
+    state?         : string;
+  };
+  boundingbox?: [number, number, number, number];
 }
 
 export function SubmissionFormCard() {
 
-  const [pos, setPos] = useState<{ lat: number, lng: number } | undefined>(undefined);
-  const [isImageAdded, setImageAdded] = useState<boolean>(false);
-  const [imageError, setImageError] = useState<string | null>(null);
-  const [locationText, setLocationText] = useState<string>("");
-  const [locationError, setLocationError] = useState<string | undefined>(undefined);
+  const [ pos, setPos ] = useState<{ lat: number; lng: number } | undefined>(undefined);
+  const [ isImageAdded, setImageAdded ] = useState<boolean>(false);
+  const [ imageError, setImageError ] = useState<string | null>(null);
+  const [ locationText, setLocationText ] = useState<string>("");
+  const [ locationError, setLocationError ] = useState<string | undefined>(undefined);
 
-  const [formState, action, pending] = useActionState(submitForm, { success: true, errors: {} });
+  const [ formState, action, pending ] = useActionState(submitForm, { success: true, errors: {}});
 
   return <>{formState?.errors?.misc && <ErrorCard message={formState.errors.misc} />}
     <FormCard action={action}>
@@ -58,16 +60,29 @@ export function SubmissionFormCard() {
           note={
             pos ? `${pos.lat}, ${pos.lng}` : undefined
           } />
-        <Button type="button" disabled={!(isImageAdded && !pos)} onClick={handleGetGPS}>Wykryj</Button>
+        <Button
+          type="button"
+          disabled={!(isImageAdded && !pos)}
+          onClick={handleGetGPS}>
+          Wykryj
+        </Button>
       </div>
 
-      <TextInput name='desc' placeholder="przy sklepie" label="Opis lokalizacji" />
-      <Button rank={ButtonRank.Primary} disabled={pending}>{pending ? "Wysyłanie..." : "Wyślij"}</Button>
+      <TextInput
+        name='desc'
+        placeholder="przy sklepie"
+        label="Opis miejsca"
+        error={locationError}/>
+      <Button
+        rank={ButtonRank.Primary}
+        disabled={pending}>
+        {pending ? "Wysyłanie..." : "Wyślij"}
+      </Button>
     </FormCard>
   </>;
 
   function handleGetGPS() {
-    console.log("Trying to get gps")
+    console.log("Trying to get gps");
 
     setLocationError(undefined);
 
@@ -78,23 +93,22 @@ export function SubmissionFormCard() {
       console.log("Geolocation is ok.");
 
 
-      navigator.geolocation.getCurrentPosition(async (pos) => {
-        console.log(`Got location: ${pos.coords.latitude}, ${pos.coords.longitude}`);
-        setPos({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        setLocationText(await getLocaltionString({ lat: pos.coords.latitude, lng: pos.coords.longitude }));
-      },
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          console.log(`Got location: ${pos.coords.latitude}, ${pos.coords.longitude}`);
+          setPos({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          setLocationText(await getLocaltionString({ lat: pos.coords.latitude, lng: pos.coords.longitude }));
+        },
         () => {
           setLocationError("Nie udało sie pobrac lokalizacji");
         },
-        {
-          enableHighAccuracy: true
-        }
+        { enableHighAccuracy: true }
       );
     }
   }
 
-  async function getLocaltionString(pos: { lat: number; lng: number; }): Promise<string> {
-    const res = await fetch(`https://eu1.locationiq.com/v1/reverse?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_KEY}&lat=${pos.lat}&lon=${pos.lng}&normalizeaddress=1&format=json`, { headers: { "accept-language": "pl" } });
+  async function getLocaltionString(pos: { lat: number; lng: number }): Promise<string> {
+    const res = await fetch(`https://eu1.locationiq.com/v1/reverse?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_KEY}&lat=${pos.lat}&lon=${pos.lng}&normalizeaddress=1&format=json`, { headers: { "accept-language": "pl" }});
     const data: GeoCodeResp = await res.json();
 
     return `${data.address.road ?? ""} ${data.address.house_number ?? ""}, ${data.address.city}`;
@@ -107,11 +121,11 @@ export function SubmissionFormCard() {
     setLocationText("");
 
     if (!image) {
-      return setImageError("Nie przekazano pliku")
-    };
+      return setImageError("Nie przekazano pliku");
+    }
 
     setImageAdded(true);
-    let { latitude, longitude } = await exifr.gps(image) ?? {};
+    const { latitude, longitude } = await exifr.gps(image) ?? {};
 
     if (latitude && longitude) {
       setPos({ lat: latitude, lng: longitude });

@@ -30,8 +30,8 @@ export default async function Page() {
         <tr>
           {/* <th>Obraz</th> */}
           {isMod && <th>Autor</th>}
+          <th>Adres</th>
           <th>Opis miejsca</th>
-          <th>Opis</th>
           <th>Data</th>
         </tr>
       </thead>
