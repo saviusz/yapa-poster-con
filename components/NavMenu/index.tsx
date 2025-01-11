@@ -15,6 +15,7 @@ export default async function NavMenu() {
     <div className={style.links}>
       <Link href="/">Nowe zgłoszenia</Link>
       {user && <Link href="/submissions">Przesłane</Link>}
+      <Link href="/rules">Regulamin</Link>
     </div>
     {user
       ? <Link href="/settings" className={style.user}>Cześć <span className={style.username}>{user?.email}</span>!</Link>

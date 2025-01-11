@@ -1,0 +1,32 @@
+.main {
+    padding: calc(var(--s-padding) * 3);
+    padding-top: calc(var(--s-padding) * 2);
+
+    h1 {
+        text-align: center;
+    }
+
+    h3 {
+        margin-block-end: .5rem;
+    }
+
+    p, ul {
+        line-height: 1.35;
+        margin-block-end: 1.5rem;
+        list-style-position: inside;
+
+        padding-inline: .5rem;
+    }
+
+    li {
+        margin: .2rem; 
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main {
+        padding: var(--s-padding);
+        padding-top: calc(var(--s-padding) * 2);
+    }
+    
+}
