@@ -12,6 +12,7 @@ export interface SignUpState {
     password?   : string;
     r_password? : string;
     misc?       : string;
+    terms?      : string;
   };
 }
 
@@ -19,13 +20,28 @@ export async function signUpAction(state: SignUpState | undefined, formData: For
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const r_password = formData.get("r_password")?.toString();
+  const rulesAccepted = formData.get("terms")?.toString();
+
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
   let currentState: SignUpState = { success: true };
 
-  if (!email) currentState = { ...currentState, success: false, errors: { email: "Email jest wymagany" }};
-  if (!password) currentState = { ...currentState, success: false, errors: { password: "Hasło jest wymagane" }};
+  if (!email) currentState = {
+    ...currentState,
+    success : false,
+    errors  : { ...currentState.errors, email: "Email jest wymagany" }
+  };
+  if (!password) currentState = {
+    ...currentState,
+    success : false,
+    errors  : { ...currentState.errors, password: "Hasło jest wymagane" }
+  };
+  if (!rulesAccepted) currentState = {
+    ...currentState,
+    success : false,
+    errors  : { ...currentState.errors, terms: "Musisz zaakceptować regulamin" }
+  };
 
   if (!currentState.success) return currentState;
 
@@ -37,7 +53,7 @@ export async function signUpAction(state: SignUpState | undefined, formData: For
     },
   };
 
-  const { error } = await supabase.auth.signUp({
+  const { error, data: { user } } = await supabase.auth.signUp({
     email    : email!,
     password : password!,
     options  : { emailRedirectTo: `${origin}/auth/callback` },
@@ -46,11 +62,24 @@ export async function signUpAction(state: SignUpState | undefined, formData: For
   if (error) {
     return {
       success : false,
-      errors  : { misc: error.message },
+      errors  : { misc: process.env.NODE_ENV == "development" ? error.message : "Błąd tworzenia konta" },
     };
   }
 
-  return redirect("/");
+  const { error: addUserErr } = await supabase.from("users")
+    .insert({ user_id: user?.id, rules_accepted: !!rulesAccepted  });
+  if (addUserErr) {
+    const { error: delError } = await supabase.auth.admin.deleteUser(user!.id);
+
+    console.log(delError);
+
+    return {
+      success : false,
+      errors  : { misc: process.env.NODE_ENV == "development" ? addUserErr.message : "Błąd zapisywania danych" }
+    };
+  }
+
+  redirect("/login?success=true");
 }
 
 export interface SignInState {
