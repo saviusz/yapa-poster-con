@@ -6,8 +6,8 @@ import React, { useActionState } from "react";
 import { signUpAction } from "@/app/(auth)/actions";
 import Button, { ButtonRank } from "@/components/Controls/Button";
 import TextInput from "@/components/Controls/TextInput";
-import ErrorCard from "@/components/ErrorCard";
 import { FormCard } from "@/components/FormCard";
+import StatusCard from "@/components/StatusCard";
 
 export default function Index() {
 
@@ -15,8 +15,8 @@ export default function Index() {
 
   return <>
     <h1>Zarejestruj się</h1>
-    {state?.errors
-            && <ErrorCard message={state.errors.misc ?? JSON.stringify(state.errors)} />}
+    {state?.errors?.misc
+      && <StatusCard message={state.errors.misc} />}
     <FormCard action={action}>
       <TextInput type="email" label='Email' name='email' placeholder="email@example.com" />
       <TextInput type={"password"} label='Hasło' name='password' placeholder="Hasło" />

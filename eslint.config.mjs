@@ -154,10 +154,7 @@ export default tseslint.config(
       ],
       "@stylistic/object-curly-spacing": [
         "error",
-        "always",
-        {
-          "objectsInObjects": false
-        }
+        "always"
       ],
       "@stylistic/one-var-declaration-per-line": "error",
       "@stylistic/operator-linebreak": [

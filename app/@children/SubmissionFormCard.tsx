@@ -8,8 +8,8 @@ import { useActionState, useState } from "react";
 import Button, { ButtonRank } from "@/components/Controls/Button";
 import ImageDropzone from "@/components/Controls/ImageDropzone";
 import TextInput from "@/components/Controls/TextInput";
-import ErrorCard from "@/components/ErrorCard";
 import { FormCard } from "@/components/FormCard";
+import StatusCard from "@/components/StatusCard";
 
 import { submitForm } from "./submitForm";
 
@@ -43,9 +43,9 @@ export function SubmissionFormCard() {
   const [ locationText, setLocationText ] = useState<string>("");
   const [ locationError, setLocationError ] = useState<string | undefined>(undefined);
 
-  const [ formState, action, pending ] = useActionState(submitForm, { success: true, errors: {}});
+  const [ formState, action, pending ] = useActionState(submitForm, { success: true, errors: {} });
 
-  return <>{formState?.errors?.misc && <ErrorCard message={formState.errors.misc} />}
+  return <>{formState?.errors?.misc && <StatusCard message={formState.errors.misc} />}
     <FormCard action={action}>
       <input type="hidden" name="lat" value={pos?.lat} />
       <input type="hidden" name="lng" value={pos?.lng} />
@@ -108,7 +108,7 @@ export function SubmissionFormCard() {
   }
 
   async function getLocaltionString(pos: { lat: number; lng: number }): Promise<string> {
-    const res = await fetch(`https://eu1.locationiq.com/v1/reverse?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_KEY}&lat=${pos.lat}&lon=${pos.lng}&normalizeaddress=1&format=json`, { headers: { "accept-language": "pl" }});
+    const res = await fetch(`https://eu1.locationiq.com/v1/reverse?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_KEY}&lat=${pos.lat}&lon=${pos.lng}&normalizeaddress=1&format=json`, { headers: { "accept-language": "pl" } });
     const data: GeoCodeResp = await res.json();
 
     return `${data.address.road ?? ""} ${data.address.house_number ?? ""}, ${data.address.city}`;

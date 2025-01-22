@@ -1,0 +1,20 @@
+.container {
+    --s-color: var(--c-surface-error);
+    --o-color: var(--c-outline-error);
+    
+    padding: calc(var(--s-padding) / 4) calc(var(--s-padding) / 2);
+
+    border-radius: var(--r-normal);
+
+    border: 1px solid var(--o-color);
+    background-color: var(--s-color);
+
+    width: fit-content;
+
+    margin-block: var(--s-padding);
+}
+
+.success {
+    --s-color: var(--c-surface-success);
+    --o-color: var(--c-outline-success);
+}
