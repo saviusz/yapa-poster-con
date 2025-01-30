@@ -13,7 +13,7 @@
 }
 
 .form {
-    padding: var(--s-padding);
+    padding-inline: var(--s-padding);
 
     align-items: center;
 
@@ -42,4 +42,22 @@
 
         margin-top: var(--s-padding);
     }
+}
+
+.poster {
+    max-height: 80vh;
+    max-width: 85vw;
+    height: fit-content;
+    width: fit-content;
+    object-fit: contain;
+
+    padding: 1.5rem;
+
+    border: 2px dashed var(--c-primary);
+    border-radius: 1rem;
+}
+
+.cta {
+    margin-block: var(--s-padding);
+    margin-right: auto;
 }
