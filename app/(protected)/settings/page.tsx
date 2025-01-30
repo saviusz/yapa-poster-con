@@ -1,7 +1,8 @@
-import { signOutAction } from '@/app/(auth)/actions'
-import Button from '@/components/Controls/Button'
-import { createClient } from '@/utils/supabase/server';
-import React from 'react'
+import React from "react";
+
+import { signOutAction } from "@/app/(auth)/actions";
+import Button from "@/components/Controls/Button";
+import { createClient } from "@/utils/supabase/server";
 
 
 export default async function Page() {
@@ -9,7 +10,7 @@ export default async function Page() {
   const supabase = await createClient();
   const user = await supabase.auth.getUser();
 
-  return <>
+  return <main>
     <h2>Dane</h2>
     <table>
       <tbody>
@@ -29,15 +30,15 @@ export default async function Page() {
           <td>Utworzono:</td>
           <td>
             {user.data.user?.created_at
-              ? Intl.DateTimeFormat('pl-PL', { dateStyle: 'long' }).format(
+              ? Intl.DateTimeFormat("pl-PL", { dateStyle: "long" }).format(
                   new Date(user.data.user?.created_at)
                 )
-              : 'Nieznana data utworzenia konta'}
+              : "Nieznana data utworzenia konta"}
           </td>
         </tr>
       </tbody>
     </table>
 
     <Button onClick={signOutAction}>Wyloguj</Button>
-  </>
+  </main>;
 }

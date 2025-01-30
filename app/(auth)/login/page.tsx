@@ -16,7 +16,7 @@ export default function Index() {
   const [ state, action, pending ] = useActionState(signInAction, {});
   const success = useSearchParams().get("success");
 
-  return <>
+  return <main>
     <h1>Zaloguj się</h1>
     {(state?.misc && <StatusCard message={state.misc} />)
     || (success && <StatusCard message="Pomyślnie zarejestrowano. Sprawdź maila, by zweryfikować konto" type="success" title="Sukces" />)}
@@ -41,6 +41,6 @@ export default function Index() {
       </Button>
       <p>Nie masz konta? <Link href="/register">Zarejestruj się!</Link></p>
     </FormCard>
-  </>;
+  </main>;
 
 }

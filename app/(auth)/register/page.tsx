@@ -15,7 +15,7 @@ export default function Index() {
 
   const [ state, action, pending ] = useActionState(signUpAction, undefined);
 
-  return <>
+  return <main>
     <h1>Zarejestruj się</h1>
     {state?.errors?.misc
       && <StatusCard message={state.errors.misc} />}
@@ -35,5 +35,5 @@ export default function Index() {
       <div><Button disabled={pending} rank={ButtonRank.Primary}>{pending ? "Rejestracja..." : "Zarejestruj się"}</Button></div>
       <p>Masz już konto? <Link href="/login">Zaloguj się!</Link></p>
     </FormCard>
-  </>;
+  </main>;
 }

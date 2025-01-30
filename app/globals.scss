@@ -84,11 +84,9 @@ body {
     min-height: 100vh;
     height: 100%;
 
-    @media screen and (max-width: 600px) {
-        flex-direction: column-reverse;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
 
-        justify-content: space-between;
-    }
 }
 
 main {
