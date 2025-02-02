@@ -1,0 +1,63 @@
+.container {
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--c-surface);
+    border-radius: var(--r-normal);
+
+    border: 1px solid var(--c-outline);
+
+    width: 100%;
+    min-width: 40vmin;
+
+    padding: calc(var(--s-padding) / 2);
+    gap: var(--s-gap);
+
+    align-items: center;
+    justify-content: center;
+
+    & img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: var(--r-normal);
+    }
+
+    @media (min-width: 800px) {
+        flex-direction: row;
+
+        & img {
+            max-height: 40vmin;
+            max-width: 60%;
+            width: auto;
+        }
+    }
+}
+
+.props {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    grid-auto-rows: auto;
+
+    overflow: hidden;
+    gap: calc(var(--s-gap) / 2);
+
+    align-content: center;
+
+    & .row {
+        display: contents;
+    }
+
+    & .label {
+        font-weight: 700;
+        text-align: right;
+    }
+
+    & span {
+        text-align: left;
+    }
+
+}
