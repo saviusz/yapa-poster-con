@@ -5,6 +5,8 @@ import React from "react";
 
 import { createClient } from "@/utils/supabase/server";
 
+import Section from "./section";
+
 export default async function Page() {
 
   const supabase = await createClient();
@@ -12,7 +14,11 @@ export default async function Page() {
 
   if (!user) redirect("/login");
 
-  const isMod = user.data.user?.role == "admin";
+  const roleQuery = await supabase.schema("public").from("users")
+    .select("role")
+    .eq("id", user.data.user?.id);
+
+  const isMod = (roleQuery.data && roleQuery.data[0]?.role in [ "moderator", "admin" ]) ?? false;
 
   let query = supabase
     .from("submissions")
@@ -21,47 +27,45 @@ export default async function Page() {
   if(!isMod) query = query.eq("contestant_id", user.data.user?.id);
 
   const { data } = await query;
+  if (!data) return <main>Brak danych do wyświetlenia</main>;
+
+  const newData = await Promise.all(data?.map(async (item) => {
+    let contestant;
+
+    const authorQuery = await supabase.from("users").select("*")
+      .eq("user_id", item.contestant_id)
+      .single();
+
+    if(!authorQuery.data) {
+      console.log("Author not found", authorQuery);
+      contestant = null;
+    } else {
+      contestant = authorQuery.data;
+    }
+
+    const image = await supabase.storage
+      .from("user_photos")
+      .createSignedUrl(item.image_path, 180);
+
+    return {
+      id          : item.id,
+      address     : item.loc_desc,
+      description : item.description,
+      image_path  : image.data?.signedUrl ?? "",
+      contestant  : {
+        id    : contestant.user_id,
+        email : contestant.email
+      },
+      lat : item.loc.coordinates[1],
+      lng : item.loc.coordinates[0]
+    };
+  }));
 
 
   return <main className={style.main}>
     <h1>Twoje zgłoszenia</h1>
-    <table className={style.table}>
-      <thead>
-        <tr>
-          {/* <th>Obraz</th> */}
-          {isMod && <th>Autor</th>}
-          <th>Adres</th>
-          <th>Opis miejsca</th>
-          <th>Data</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data?.map(async (item) => {
-          const image = await supabase.storage
-            .from("user_photos")
-            .createSignedUrl(item.image_path, 60);
-
-          let contestant;
-
-          const authorQuery = await supabase.auth.admin.getUserById(item.contestant_id);
-          console.log("Author", authorQuery);
-
-          if(!authorQuery.data) {
-            console.log("Author not found", authorQuery);
-            contestant = null;
-          } else {
-            contestant = authorQuery.data;
-          }
-
-          return <tr key={item.id}>
-            {isMod && <td>{contestant?.user?.email ? contestant.user?.email : "-"}</td>}
-            {/* <td><img src={image.data?.signedUrl} alt="Obrazek"/></td> */}
-            <td>{item.loc_desc}{}</td>
-            <td>{item.desc}</td>
-            <td>{item.created_at}</td>
-          </tr>;
-        })}
-      </tbody>
-    </table>
+    <div className={style.table}>{newData && <Section data={newData} />}</div>
   </main>;
 }
+
+

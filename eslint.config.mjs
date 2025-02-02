@@ -149,7 +149,7 @@ export default tseslint.config(
       "@stylistic/object-curly-newline": [
         "error",
         {
-          "multiline": true
+          "consistent": true
         }
       ],
       "@stylistic/object-curly-spacing": [
