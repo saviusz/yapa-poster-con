@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { useActionState } from "react";
 
 import { signInAction } from "@/app/(auth)/actions";
@@ -13,11 +13,18 @@ import StatusCard from "@/components/StatusCard";
 
 export default function Index() {
 
-  const [ state, action, pending ] = useActionState(signInAction, {});
-  const success = useSearchParams().get("success");
-
   return <main>
     <h1>Zaloguj się</h1>
+    <Suspense><Form /></Suspense>
+  </main>;
+
+}
+
+
+function Form() {
+  const [ state, action, pending ] = useActionState(signInAction, {});
+  const success = useSearchParams().get("success");
+  return <>
     {(state?.misc && <StatusCard message={state.misc} />)
     || (success && <StatusCard message="Pomyślnie zarejestrowano. Sprawdź maila, by zweryfikować konto" type="success" title="Sukces" />)}
     <FormCard action={action}>
@@ -40,7 +47,5 @@ export default function Index() {
         {pending ? "Logowanie..." : "Zaloguj się"}
       </Button>
       <p>Nie masz konta? <Link href="/register">Zarejestruj się!</Link></p>
-    </FormCard>
-  </main>;
-
+    </FormCard></>;
 }
