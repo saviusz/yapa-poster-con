@@ -15,7 +15,7 @@ export default function Page() {
       </p>
 
       <h3>Czas trwania Konkursu</h3>
-      <p>Konkurs trwa od [data rozpoczęcia] do [data zakończenia] (włącznie).</p>
+      <p>Konkurs trwa od 15.02.2025 r. do 09.03.2025 r. (włącznie).</p>
 
       <h3>Warunki Uczestnictwa</h3>
       <ul>
@@ -33,8 +33,8 @@ export default function Page() {
           w miejscach publicznych lub w lokalach (np. sklepy, szkoły, biura, kluby, uczelnie).
         </li>
         <li>
-          Plakaty będą dostarczane przez Organizatora w [miejsce odbioru plakatów],
-          lub można je pobrać w formie elektronicznej z <a href="#">linku do pobrania</a>.
+          Plakaty będą dostarczane przez Organizatora z siedziby
+          (Al. Politechniki 9a, z tyłu budynku) lub w sekretariacie wybranych szkół.
         </li>
         <li>
           Plakaty muszą być powieszane w sposób widoczny,
@@ -51,7 +51,6 @@ export default function Page() {
       <ul>
         <li>Zwycięzcą konkursu zostanie osoba, która powiesi najwięcej plakatów, spełniając wszystkie warunki konkursu.</li>
         <li>Nagrodą główną w konkursie są karnety na Yapę.</li>
-        <li>Dodatkowo, przewidziane są nagrody pocieszenia dla kolejnych uczestników, którzy będą mieli największą liczbę powieszonych plakatów po zwycięzcy.</li>
         <li>Nagrody nie podlegają wymianie na gotówkę ani inne formy.</li>
       </ul>
 
