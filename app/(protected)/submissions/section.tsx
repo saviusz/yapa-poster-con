@@ -14,9 +14,9 @@ interface SectionProps {
     lat         : number;
     lng         : number;
     contestant: {
-      id    : number;
+      id    : string;
       email : string;
-    };
+    } | null;
   }[];
 }
 

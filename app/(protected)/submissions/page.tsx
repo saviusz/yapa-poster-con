@@ -52,10 +52,12 @@ export default async function Page() {
       address     : item.loc_desc,
       description : item.description,
       image_path  : image.data?.signedUrl ?? "",
-      contestant  : {
-        id    : contestant.user_id,
-        email : contestant.email
-      },
+      contestant  : contestant
+        ? {
+            id    : contestant.id,
+            email : contestant.email
+          }
+        : null,
       lat : item.loc.coordinates[1],
       lng : item.loc.coordinates[0]
     };
